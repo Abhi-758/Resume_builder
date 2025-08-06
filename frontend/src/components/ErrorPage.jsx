@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ErrorPage = () => {
+export default function ErrorPage() {
   return (
     <div className="app container">
-      <h3>
-        Page not found. Go back to the <Link to="/">Home page</Link>.
-      </h3>
+      <h2>404 - Page not found</h2>
+      <p>
+        Go back to <Link to="/">Home</Link>.
+      </p>
     </div>
   );
-};
-
-export default ErrorPage;
+}

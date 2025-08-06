@@ -1,22 +1,36 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import Resume from "./components/Resume";
-import ErrorPage from "./components/ErrorPage";
-import Loading from "./components/Loading";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
+import Home from "./pages/Home";
+import RegisterForm from "./components/RegisterForm";
+import LoginForm from "./components/LoginForm";
+import Dashboard from "./pages/Dashboard";
+import ErrorPage from "./components/ErrorPage";
+
+function RequireAuth({ children }) {
+  const loggedIn = localStorage.getItem("loggedIn") === "true";
+  return loggedIn ? children : <Navigate to="/login" />;
+}
+
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/resume" element={<Resume />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route
+          path="/dashboard/*"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App;
 
 
