@@ -1,55 +1,49 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import loginSchema from "../schemas/loginSchema";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setLoggedin } from "../redux/reducers/UserReducer";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
+  const [errors, seterrors] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-
-
-
-  // src/components/LoginForm.jsx (inside handleSubmit or similar)
-fetch("http://localhost:5000/api/login", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    email: formData.email,
-    password: formData.password,
-  }),
-})
-  .then(res => res.json())
-  .then(data => {
-    if (data.token) {
-      // Save token, log in user, etc.
-      localStorage.setItem("token", data.token);
-      // Redirect to dashboard/home
-    } else {
-      // Handle error (invalid credentials)
-    }
-  })
-  .catch(err => {
-    // Handle network/server error
-  });
-
-
-  const handleChange = e => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const regUser = JSON.parse(localStorage.getItem("user"));
-    // Simple email/password check (use backend in production)
-    if (!formData.email || !formData.password) {
-      setError("All fields required.");
-    } else if (!regUser || regUser.email !== formData.email || regUser.password !== formData.password) {
-      setError("Invalid credentials.");
-    } else {
-      setError("");
-      // Mark user as logged in (use a real auth/system in production)
-      localStorage.setItem("loggedIn", "true");
-      navigate("/dashboard");
+
+    try {
+      let result = loginSchema.safeParse(formData);
+      if (!result.success) {
+        const fieldErrors = result.error.issues.reduce((acc, err) => {
+          acc[err.path[0]] = err.message;
+          return acc;
+        }, {});
+        seterrors(fieldErrors);
+      } else {
+        seterrors({});
+        try {
+          let res = await axios.post(
+            "http://localhost:5000/api/users/login",
+            formData,
+            { withCredentials: true }
+          );
+          toast.success("Login Success");
+          dispatch(setLoggedin(true));
+          navigate("/dashboard");
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+        }
+      }
+    } catch (error) {
+      console.log(error?.response?.data?.message);
     }
   };
 
@@ -58,14 +52,29 @@ fetch("http://localhost:5000/api/login", {
       <h2>Login</h2>
       <label className="resume-form__label">
         Email:
-        <input className="resume-form__input" type="email" name="email" value={formData.email} onChange={handleChange} />
+        <input
+          className="resume-form__input"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        {errors.email && <p className="error-message">{errors.email}</p>}
       </label>
-      <label className="resume-form__label">
-        Password:
-        <input className="resume-form__input" type="password" name="password" value={formData.password} onChange={handleChange} />
-      </label>
-      {error && <p className="error-message">{error}</p>}
-      <button className="submit-btn" type="submit">Login</button>
+      <label className="resume-form__label"> Password: </label>
+
+      <input
+        className="resume-form__input"
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+      {errors.password && <p className="error-message">{errors.password}</p>}
+
+      <button className="submit-btn" type="submit">
+        Login
+      </button>
     </form>
   );
 }

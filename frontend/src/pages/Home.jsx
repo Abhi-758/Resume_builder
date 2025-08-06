@@ -1,14 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className="app container">
-      <h1>Welcome to the Resume Builder</h1>
-      <p>
-        <Link to="/register">Register</Link> to get started, or{" "}
-        <Link to="/login">Login</Link> if you already have an account.
-      </p>
-    </div>
-  );
+    <div>Home</div>
+  )
 }
+
+export default Home
