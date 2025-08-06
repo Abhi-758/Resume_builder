@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import registerSchema from "../schemas/registerSchema";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoggedin } from "../redux/reducers/UserReducer";
 import { toast } from "react-toastify";
 
@@ -16,6 +16,15 @@ export default function RegisterForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
+
+  let {isLoggedin} = useSelector(state => state.user)
+
+  useEffect(() => {
+    if(isLoggedin) {
+      return navigate("/dashboard")
+    }
+    return navigate("/register")
+  },[])
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };

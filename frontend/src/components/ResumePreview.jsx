@@ -1,15 +1,19 @@
+// ResumePreview.jsx
 import React from "react";
+import "./ResumePreview.css";
+import { useReactToPrint } from "react-to-print";
 
-export default function ResumePreview({ resumeData }) {
+const ResumePreview = React.forwardRef(({ resumeData }, ref) => {
+  const reactToPrintFn = useReactToPrint({ contentRef: ref });
+
   return (
-    <div className="resume-preview">
-      <h2>{resumeData.fullName || "Your Name"}</h2>
-      {resumeData.email && (
-        <p><strong>Email:</strong> {resumeData.email}</p>
-      )}
-      {resumeData.phone && (
-        <p><strong>Phone:</strong> {resumeData.phone}</p>
-      )}
+ <>
+ 
+    <div ref={ref} className="resume-preview-container">
+      <h2 className="resume-name">{resumeData.fullName || "Your Name"}</h2>
+
+      {resumeData.email && <p><strong>Email:</strong> {resumeData.email}</p>}
+      {resumeData.phone && <p><strong>Phone:</strong> {resumeData.phone}</p>}
 
       {resumeData.education && (
         <>
@@ -37,6 +41,15 @@ export default function ResumePreview({ resumeData }) {
           <p>{resumeData.skills}</p>
         </>
       )}
+
+      
     </div>
+
+     <button style={{width: "100px", height: "45px"}} onClick={reactToPrintFn}>Print</button>
+ 
+ </>   
+
   );
-}
+});
+
+export default ResumePreview;

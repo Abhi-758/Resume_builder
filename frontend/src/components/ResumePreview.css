@@ -1,0 +1,30 @@
+/* ResumePreview.css */
+.resume-preview-container {
+  width: 100%;
+  min-height: 100%;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2937;
+}
+
+.resume-preview-container h2.resume-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1d4ed8;
+  margin-bottom: 0.5rem;
+}
+
+.resume-preview-container h3 {
+  margin-top: 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.resume-preview-container p,
+.resume-preview-container li {
+  font-size: 1rem;
+  margin: 0.25rem 0;
+}

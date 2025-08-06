@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loginSchema from "../schemas/loginSchema";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoggedin } from "../redux/reducers/UserReducer";
 
 export default function LoginForm() {
@@ -11,6 +11,15 @@ export default function LoginForm() {
   const [errors, seterrors] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  let { isLoggedin } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (isLoggedin) {
+      return navigate("/dashboard");
+    }
+    return navigate("/login");
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
