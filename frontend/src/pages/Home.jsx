@@ -99,12 +99,12 @@ function Home() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <FileText className="w-8 h-8 text-blue-400" />
-            <span className="text-xl font-bold">ResumeAI</span>
+            <span className="text-xl font-bold">ResumeForge</span>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {["Features", "Templates", "Pricing", "About"].map((item, i) => (
+            {["Features",  "Pricing", "About"].map((item, i) => (
               <a
                 key={i}
                 href={`#${item.toLowerCase()}`}
@@ -136,7 +136,7 @@ function Home() {
         {isMenuOpen && (
           <div className="md:hidden bg-slate-900 border-t border-slate-800 px-4 py-4">
             <div className="flex flex-col gap-4">
-              {["Features", "Templates", "Pricing", "About"].map((item, i) => (
+              {["Features", "Pricing", "About"].map((item, i) => (
                 <a
                   key={i}
                   href={`#${item.toLowerCase()}`}
@@ -191,7 +191,7 @@ function Home() {
       {/* Features */}
       <section id="features" className="py-20 bg-slate-900/50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Why Choose ResumeAI?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Why Choose ResumeForge?</h2>
           <p className="text-xl text-slate-300 mb-12 max-w-3xl mx-auto">
             Our advanced features help you create resumes that get noticed by both ATS systems and human recruiters.
           </p>
@@ -210,6 +210,139 @@ function Home() {
           </div>
         </div>
       </section>
+
+
+       {/* How It Works */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">How It Works</h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Create your professional resume in just 4 simple steps. No design experience required.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <div key={index} className="relative">
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:block absolute top-6 left-full w-full h-0.5 bg-gradient-to-r from-blue-600 to-transparent"></div>
+                )}
+                <div className="bg-slate-800 p-6 rounded-xl">
+                  <div className="text-3xl font-bold text-blue-400 mb-4">{step.number}</div>
+                  <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                  <p className="text-slate-300">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+       {/* Testimonials */}
+      <section className="py-20 bg-slate-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Success Stories</h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Join thousands of professionals who landed their dream jobs with ResumeForge.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-slate-800 p-8 rounded-xl">
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-slate-300 mb-6 italic">"{testimonial.content}"</p>
+                <div>
+                  <div className="font-semibold">{testimonial.name}</div>
+                  <div className="text-slate-400">{testimonial.role} at {testimonial.company}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-900 to-purple-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Ready to Land Your Dream Job?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Join over 500,000 job seekers who have successfully created professional resumes with ResumeForge.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button 
+              onClick={() => setCurrentPage('register')}
+              className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105 flex items-center space-x-2"
+            >
+              <span>Get Started Free</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <div className="flex items-center space-x-2 text-blue-100">
+              <CheckCircle className="w-5 h-5" />
+              <span>No credit card required</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 border-t border-slate-800 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <FileText className="w-8 h-8 text-blue-400" />
+                <span className="text-xl font-bold">ResumeForge</span>
+              </div>
+              <p className="text-slate-400">
+                Build professional resumes that get you hired. Powered by AI, trusted by professionals worldwide.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold mb-4">Product</h3>
+              <ul className="space-y-2 text-slate-400">
+                <li><a href="#" className="hover:text-white transition-colors">Resume Builder</a></li>
+                {/* <li><a href="#" className="hover:text-white transition-colors">Templates</a></li> */}
+                <li><a href="#" className="hover:text-white transition-colors">Cover Letters</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">LinkedIn Optimizer</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold mb-4">Resources</h3>
+              <ul className="space-y-2 text-slate-400">
+                <li><a href="#" className="hover:text-white transition-colors">Resume Examples</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Career Advice</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Interview Tips</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-slate-400">
+                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400">
+            <p>&copy; 2025 ResumeForge. All rights reserved. Built with ❤️ for job seekers worldwide.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
