@@ -413,17 +413,17 @@ function Home() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <a href="/contact" className="hover:text-white transition-colors">
                     Contact
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <a href="/privacypolicy" className="hover:text-white transition-colors">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <a href="termsandservices" className="hover:text-white transition-colors">
                     Terms of Service
                   </a>
                 </li>
