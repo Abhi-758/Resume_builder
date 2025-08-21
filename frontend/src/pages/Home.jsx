@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FileText,
   Zap,
@@ -11,9 +11,17 @@ import {
   X,
   Globe,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLoggedin } from "../redux/reducers/UserReducer";
 
 function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate()
+  // let dispatch = useDispatch()
+  // useEffect(() => {
+  //   dispatch(setLoggedin(false))
+  // },[])
 
   const features = [
     {
@@ -159,7 +167,7 @@ function Home() {
             Create professional, ATS-friendly resumes with our AI-powered builder. Land more interviews with templates designed by hiring experts.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-xl text-lg font-semibold transition transform hover:scale-105 flex items-center gap-2">
+            <button onClick={() => navigate('/register')} className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-xl text-lg font-semibold transition transform hover:scale-105 flex items-center gap-2">
               <span>Start Building Free</span>
               <ArrowRight className="w-5 h-5" />
             </button>

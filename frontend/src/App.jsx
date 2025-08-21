@@ -7,6 +7,8 @@ import Dashboard from "./pages/Dashboard";
 import ErrorPage from "./components/ErrorPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+import "./index.css"
+
 export default function App() {
   return (
     <Routes>
