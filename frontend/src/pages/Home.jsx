@@ -103,7 +103,7 @@ function Home() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center right-6 absolute gap-8">
             {["Features",  "Pricing", "About"].map((item, i) => (
               <a
                 key={i}
@@ -113,12 +113,12 @@ function Home() {
                 {item}
               </a>
             ))}
-            <button className="text-slate-300 hover:text-white transition">
+            {/* <button className="text-slate-300 hover:text-white transition">
               Sign In
             </button>
             <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-xl transition">
               Get Started
-            </button>
+            </button> */}
           </div>
 
           {/* Mobile Menu Btn */}
@@ -127,7 +127,7 @@ function Home() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-slate-300 hover:text-white"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen && <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -145,12 +145,12 @@ function Home() {
                   {item}
                 </a>
               ))}
-              <button className="text-slate-300 hover:text-white text-left">
+              {/* <button className="text-slate-300 hover:text-white text-left">
                 Sign In
               </button>
               <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-xl transition">
                 Get Started
-              </button>
+              </button> */}
             </div>
           </div>
         )}
