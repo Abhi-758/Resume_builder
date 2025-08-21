@@ -87,7 +87,7 @@ export default function About() {
       {/* CTA */}
       <div className="text-center mt-12">
         <a
-          href="/create"
+          href="/register"
           className="inline-block px-6 py-3 rounded-2xl bg-sky-600 text-white font-medium shadow hover:bg-sky-700 transition"
         >
           Create Your Resume — It’s Free

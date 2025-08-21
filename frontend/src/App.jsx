@@ -6,7 +6,7 @@ import LoginForm from "./components/LoginForm";
 import Dashboard from "./pages/Dashboard";
 import ErrorPage from "./components/ErrorPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import About from "./src/pages/About";
+import About from "./pages/About";
 
 import "./index.css"
 
