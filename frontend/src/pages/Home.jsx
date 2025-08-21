@@ -104,7 +104,7 @@ function Home() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center right-6 absolute gap-8">
-            {["Features",  "Pricing", "About"].map((item, i) => (
+            {["Features",  "About"].map((item, i) => (
               <a
                 key={i}
                 href={`#${item.toLowerCase()}`}
@@ -171,9 +171,9 @@ function Home() {
               <span>Start Building Free</span>
               <ArrowRight className="w-5 h-5" />
             </button>
-            <button className="border border-slate-600 hover:border-slate-500 px-8 py-4 rounded-xl text-lg font-semibold transition">
+            {/* <button className="border border-slate-600 hover:border-slate-500 px-8 py-4 rounded-xl text-lg font-semibold transition">
               View Templates
-            </button>
+            </button> */}
           </div>
 
           {/* Stats */}
@@ -279,7 +279,7 @@ function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button 
-              onClick={() => setCurrentPage('register')}
+              onClick={() => navigate("/register")}
               className="bg-white text-blue-900 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105 flex items-center space-x-2"
             >
               <span>Get Started Free</span>

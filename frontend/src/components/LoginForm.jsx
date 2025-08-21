@@ -168,7 +168,7 @@ export default function LoginForm() {
           </div>
 
           {/* Remember Me & Forgot Password */}
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             
             <button
               type="button"
@@ -176,7 +176,7 @@ export default function LoginForm() {
             >
               Forgot password?
             </button>
-          </div>
+          </div> */}
 
           {/* Submit Button */}
           <button
