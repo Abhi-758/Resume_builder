@@ -71,6 +71,9 @@ export default function RegisterForm() {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       console.log("User Info:", result.user); // user object
+      dispatch(setLoggedin(true))
+      toast.success("Google auth successfull")
+      navigate("/dashboard")
     } catch (error) {
       console.error("Google Sign-in Error:", error);
     }

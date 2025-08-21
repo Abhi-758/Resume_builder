@@ -71,11 +71,13 @@ export default function LoginForm() {
       try {
         const result = await signInWithPopup(auth, googleProvider);
         console.log("User Info:", result.user); // user object
+        dispatch(setLoggedin(true))
+        toast.success("Google auth successfull")
+        navigate("/dashboard")
       } catch (error) {
         console.error("Google Sign-in Error:", error);
       }
     }
-  
 
   return (
    <div className="min-h-screen bg-slate-900 flex items-center justify-center px-4 sm:px-6 lg:px-8">
