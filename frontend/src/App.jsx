@@ -6,6 +6,7 @@ import LoginForm from "./components/LoginForm";
 import Dashboard from "./pages/Dashboard";
 import ErrorPage from "./components/ErrorPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import About from "./src/pages/About";
 
 import "./index.css"
 
@@ -15,6 +16,7 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/about" element={<About/>}/>
       <Route
         path="/dashboard"
         element={
