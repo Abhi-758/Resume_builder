@@ -1,22 +1,18 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 
+export default function ResumePreview({ resumeData  }) {
+  const resumeRef = useRef(null);
 
-export default function ResumePreview({ resumeData }) {
-  const resumeRef = useRef();
+  console.log(resumeData)
 
-  // Handle Print
+  // Print handler
   const handlePrint = useReactToPrint({
-    content: () => {
-      if (!resumeRef.current) {
-        console.warn("Nothing to print!");
-        return null;
-      }
-      return resumeRef.current;
-    },
+    contentRef: resumeRef,
+    documentTitle: resumeData.fullName || "Resume",
   });
 
-  // Format date
+  // Format date helper
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
@@ -71,84 +67,96 @@ export default function ResumePreview({ resumeData }) {
         )}
 
         {/* Work Experience */}
-        {resumeData.experience && resumeData.experience.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
-              Work Experience
-            </h2>
-            {resumeData.experience.map((exp, idx) => (
-              <div key={idx} className="mb-4 last:mb-0">
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-800">
-                      {exp.position || "Position"}
-                    </h3>
-                    <p className="text-lg text-blue-600 font-medium">
-                      {exp.company || "Company"}
-                    </p>
+        {Array.isArray(resumeData.experience) &&
+          resumeData.experience.length > 0 && (
+            <section className="mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+                Work Experience
+              </h2>
+              {resumeData.experience.map((exp, idx) => (
+                <div key={idx} className="mb-4 last:mb-0">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800">
+                        {exp.position || "Position"}
+                      </h3>
+                      <p className="text-lg text-blue-600 font-medium">
+                        {exp.company || "Company"}
+                      </p>
+                    </div>
+                    <div className="text-right text-gray-600">
+                      <p>
+                        {formatDate(exp.startDate)} -{" "}
+                        {exp.currentJob ? "Present" : formatDate(exp.endDate)}
+                      </p>
+                    </div>
                   </div>
-                  <div className="text-right text-gray-600">
-                    <p>
-                      {formatDate(exp.startDate)} -{" "}
-                      {exp.currentJob ? "Present" : formatDate(exp.endDate)}
+                  {exp.description && (
+                    <p className="text-gray-700 leading-relaxed ml-4">
+                      {exp.description}
                     </p>
-                  </div>
+                  )}
                 </div>
-                {exp.description && (
-                  <p className="text-gray-700 leading-relaxed ml-4">{exp.description}</p>
-                )}
-              </div>
-            ))}
-          </section>
-        )}
+              ))}
+            </section>
+          )}
 
         {/* Education */}
-        {resumeData.education && resumeData.education.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
-              Education
-            </h2>
-            {resumeData.education.map((edu, idx) => (
-              <div key={idx} className="mb-4 last:mb-0">
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {edu.degree || "Degree"}
-                </h3>
-                <p className="text-blue-600 font-medium">{edu.institution}</p>
-                <p className="text-gray-600">
-                  {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
-                </p>
-              </div>
-            ))}
-          </section>
-        )}
+        {Array.isArray(resumeData.education) &&
+          resumeData.education.length > 0 && (
+            <section className="mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+                Education
+              </h2>
+              {resumeData.education.map((edu, idx) => (
+                <div key={idx} className="mb-4 last:mb-0">
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {edu.degree || "Degree"}
+                  </h3>
+                  <p className="text-blue-600 font-medium">{edu.institution}</p>
+                  <p className="text-gray-600">
+                    {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
+                  </p>
+                </div>
+              ))}
+            </section>
+          )}
 
         {/* Projects */}
-        {resumeData.projects && resumeData.projects.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
-              Projects
-            </h2>
-            {resumeData.projects.map((project, idx) => (
-              <div key={idx} className="mb-4 last:mb-0">
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {project.url ? (
-                    <a href={project.url} className="text-blue-600 hover:underline">
-                      {project.name || "Project Name"}
-                    </a>
-                  ) : (
-                    project.name || "Project Name"
+        {Array.isArray(resumeData.projects) &&
+          resumeData.projects.length > 0 && (
+            <section className="mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+                Projects
+              </h2>
+              {resumeData.projects.map((project, idx) => (
+                <div key={idx} className="mb-4 last:mb-0">
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {project.url ? (
+                      <a
+                        href={project.url}
+                        className="text-blue-600 hover:underline"
+                      >
+                        {project.name || "Project Name"}
+                      </a>
+                    ) : (
+                      project.name || "Project Name"
+                    )}
+                  </h3>
+                  {project.technologies && (
+                    <p className="text-gray-600 font-medium">
+                      {project.technologies}
+                    </p>
                   )}
-                </h3>
-                {project.technologies && (
-                  <p className="text-gray-600 font-medium">{project.technologies}</p>
-                )}
-                {project.description && (
-                  <p className="text-gray-700 leading-relaxed ml-4">{project.description}</p>
-                )}
-              </div>
-            ))}
-          </section>
-        )}
+                  {project.description && (
+                    <p className="text-gray-700 leading-relaxed ml-4">
+                      {project.description}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </section>
+          )}
 
         {/* Skills */}
         {skillsArray.length > 0 && (
@@ -170,25 +178,27 @@ export default function ResumePreview({ resumeData }) {
         )}
 
         {/* Certifications */}
-        {resumeData.certifications && resumeData.certifications.length > 0 && (
-          <section className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
-              Certifications
-            </h2>
-            {resumeData.certifications.map((cert, idx) => (
-              <div key={idx} className="mb-3 last:mb-0">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {cert.name || "Certification"}
-                </h3>
-                <p className="text-blue-600 font-medium">{cert.issuer}</p>
-                <p className="text-gray-600 text-sm">
-                  {formatDate(cert.issueDate)}
-                  {cert.expiryDate && ` - Expires: ${formatDate(cert.expiryDate)}`}
-                </p>
-              </div>
-            ))}
-          </section>
-        )}
+        {Array.isArray(resumeData.certifications) &&
+          resumeData.certifications.length > 0 && (
+            <section className="mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+                Certifications
+              </h2>
+              {resumeData.certifications.map((cert, idx) => (
+                <div key={idx} className="mb-3 last:mb-0">
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    {cert.name || "Certification"}
+                  </h3>
+                  <p className="text-blue-600 font-medium">{cert.issuer}</p>
+                  <p className="text-gray-600 text-sm">
+                    {formatDate(cert.issueDate)}
+                    {cert.expiryDate &&
+                      ` - Expires: ${formatDate(cert.expiryDate)}`}
+                  </p>
+                </div>
+              ))}
+            </section>
+          )}
 
         {/* Languages */}
         {languagesArray.length > 0 && (
@@ -219,7 +229,6 @@ export default function ResumePreview({ resumeData }) {
     </div>
   );
 }
-
 
 
 
