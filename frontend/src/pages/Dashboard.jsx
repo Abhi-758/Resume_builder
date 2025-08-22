@@ -13,14 +13,22 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const resumeRef = useRef(null);
 
-  const [resumeData, setResumeData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    education: "",
-    experience: [{ company: "", position: "" }],
-    skills: "",
-  });
+ const [resumeData, setResumeData] = useState({
+  fullName: "",
+  email: "",
+  phone: "",
+  location: "",
+  linkedin: "",
+  github: "",
+  summary: "",
+  experience: [{ company: "", position: "", startDate: "", endDate: "", description: "" }],
+  education: [{ institution: "", degree: "", graduationYear: "", gpa: "" }],
+  projects: [{ name: "", technologies: "", description: "", url: "" }],
+  skills: "",
+  certifications: [{ name: "", issuer: "", issueDate: "", expiryDate: "" }],
+  languages: "",
+});
+
 
   const handleLogout = async () => {
     try {
@@ -37,7 +45,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-200 flex">
-      {/* Sidebar */}
+     
       <aside className="w-60 bg-gray-900 border-r border-gray-800 flex flex-col p-6">
         <div className="flex items-center gap-2 mb-8">
           <FileText className="w-6 h-6 text-indigo-400" />
@@ -60,10 +68,10 @@ export default function Dashboard() {
         </nav>
       </aside>
 
-      {/* Main Content */}
+      
       <main className="flex-1 p-8 overflow-y-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Form */}
+          
           <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-lg">
             <h2 className="text-xl font-semibold mb-4 text-white">
               Fill Your Details
@@ -71,12 +79,14 @@ export default function Dashboard() {
             <ResumeForm resumeData={resumeData} setResumeData={setResumeData} />
           </div>
 
-          {/* Preview */}
+          
           <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-lg">
             <h2 className="text-xl font-semibold mb-4 text-white">
               Live Preview
             </h2>
             <div className="bg-gray-800 rounded-xl p-4 overflow-auto max-h-[80vh]">
+              {/* <ResumePreview resumeData={resumeData} /> */}
+
               <ResumePreview ref={resumeRef} resumeData={resumeData} />
             </div>
           </div>
