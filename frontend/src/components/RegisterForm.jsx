@@ -119,7 +119,7 @@ export default function RegisterForm() {
                 value={formData.username}
                 onChange={handleChange}
                 className="block w-full px-3 py-3 border border-slate-600 rounded-lg bg-slate-800 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                placeholder="John"
+                placeholder="Enter Your Name"
               />
               {
                 errors.username && <p className="text-sm text-red-500">{errors.username}</p>
@@ -142,7 +142,7 @@ export default function RegisterForm() {
                   value={formData.email}
                   onChange={handleChange}
                   className="block w-full pl-10 pr-3 py-3 border border-slate-600 rounded-lg bg-slate-800 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                  placeholder="john@example.com"
+                  placeholder="Enter Your Email"
                 />
                 {
                   errors.email && <p className="text-sm text-red-500">{errors.email}</p>
@@ -176,9 +176,9 @@ export default function RegisterForm() {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-slate-400 hover:text-slate-300" />
-                  ) : (
                     <Eye className="h-5 w-5 text-slate-400 hover:text-slate-300" />
+                  ) : (
+                    <EyeOff className="h-5 w-5 text-slate-400 hover:text-slate-300" />
                   )}
                 </button>
                   {
